@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\exploded-aar\com.facebook.android\facebook\4.1.2\libs\bolts.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\pre-dexed\debug\bolts-e5cdae5cf6e93bdc457ddcf739f827be04077c5d.jar" />
+    </item>
+    <item
+        jar="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\exploded-aar\com.facebook.android\facebook\4.1.2\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e471668dd8800e895fbeec9f8c5ecab2650c1fb">
+        <dex dex="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\pre-dexed\debug\classes-f55a002a9a8210b4ee22f39304b2fbe40e31a255.jar" />
+    </item>
+    <item
+        jar="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
+        <dex dex="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\pre-dexed\debug\classes-ed0c819a16a143310b74cf996737c57fe4200b67.jar" />
+    </item>
+    <item
+        jar="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\libs\firebase-client-android-2.2.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="bbe51fdbd1972d6f1ea24e9f6d1b66ee58ae134f">
+        <dex dex="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\pre-dexed\debug\firebase-client-android-2.2.3-c927963ff9aeafd1b5f7e09940c4c458e8f02813.jar" />
+    </item>
+    <item
+        jar="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-ed99f2b91625155f6256b25e18f39050faf50663.jar" />
+    </item>
+    <item
+        jar="C:\Users\Lucas Feitosa\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-970a76835c42e1ab55ace80162d2ff63bc0e436e.jar" />
+    </item>
+    <item
+        jar="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\pre-dexed\debug\classes-e66ae40ed561a3cb283fada725f110d67075c9d7.jar" />
+    </item>
+    <item
+        jar="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
+        <dex dex="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\pre-dexed\debug\classes-a278d53ec48da5e893ed415436453713174b110d.jar" />
+    </item>
+    <item
+        jar="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="fe3e0c6de7cceed888b277487238b6af9a1cc299">
+        <dex dex="D:\Lucas\Faculdade\Androide\PhpImageUploadAux\LoadImageTest\app\build\intermediates\pre-dexed\debug\classes-a0b4453c35edaf5ff43f4a1e06e8c9c629bd2d9c.jar" />
+    </item>
+
+</items>
