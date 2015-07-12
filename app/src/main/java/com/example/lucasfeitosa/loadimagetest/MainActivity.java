@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.database.Cursor;
@@ -34,12 +35,14 @@ import com.firebase.client.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import info.androidhive.slidingmenu.adapter.NavDrawerListAdapter;
 import info.androidhive.slidingmenu.model.NavDrawerItem;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity
+{
     private static int RESULT_LOAD_IMG = 1;
     //String imgDecodableString;
     Firebase ref;
@@ -63,6 +66,7 @@ public class MainActivity extends Activity {
 
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
+
 
 
     @Override
@@ -93,12 +97,11 @@ public class MainActivity extends Activity {
         // adding nav drawer items to array
         // Home
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
-        // Logout
+        // Teste
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
-        /*
-        // Photos
+        // Logout
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
-        // Communities, Will add a counter here
+        /*// Communities, Will add a counter here
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "22"));
         // Pages
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
@@ -139,7 +142,8 @@ public class MainActivity extends Activity {
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null)
+        {
             // on first time display view for first nav item
             displayView(0);
         }
@@ -161,8 +165,8 @@ public class MainActivity extends Activity {
     private class SlideMenuClickListener implements ListView.OnItemClickListener
     {
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long id) {
+        public void onItemClick(AdapterView<?> parent, View view, int position,long id)
+        {
             // display view for selected nav drawer item
             displayView(position);
         }
@@ -203,7 +207,8 @@ public class MainActivity extends Activity {
     /**
      * Diplaying fragment view for selected nav drawer list item
      * */
-    private void displayView(int position) {
+    private void displayView(int position)
+    {
         // update the main content by replacing fragments
         Fragment fragment = null;
         switch (position) {
@@ -211,13 +216,13 @@ public class MainActivity extends Activity {
                 fragment = new HomeFragment();
                 break;
             case 1:
+                fragment = new AddCardapio();
+                break;
+
+            case 2:
                 logout();
                 break;
-            /*
-            case 2:
-                fragment = new PhotosFragment();
-                break;
-            case 3:
+            /*case 3:
                 fragment = new CommunityFragment();
                 break;
             case 4:
@@ -231,8 +236,10 @@ public class MainActivity extends Activity {
                 break;
         }
 
-        if (fragment != null) {
+        if (fragment != null)
+        {
             FragmentManager fragmentManager = getFragmentManager();
+            Bundle bundle = new Bundle();
             fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
 
             // update selected item and title, then close the drawer
@@ -240,14 +247,17 @@ public class MainActivity extends Activity {
             mDrawerList.setSelection(position);
             setTitle(navMenuTitles[position]);
             mDrawerLayout.closeDrawer(mDrawerList);
-        } else {
+        }
+        else
+        {
             // error in creating fragment
             Log.e("MainActivity", "Error in creating fragment");
         }
     }
 
     @Override
-    public void setTitle(CharSequence title) {
+    public void setTitle(CharSequence title)
+    {
         mTitle = title;
         getActionBar().setTitle(mTitle);
     }

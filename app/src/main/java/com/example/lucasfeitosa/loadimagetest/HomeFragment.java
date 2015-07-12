@@ -2,6 +2,7 @@ package com.example.lucasfeitosa.loadimagetest;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
@@ -28,11 +30,11 @@ import com.google.android.gms.maps.model.LatLng;
  */
 public class HomeFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
 {
-
     public HomeFragment(){}
 
     private static String TAG;
     //Latitude de um ponto qqr em florianopolis
+    //Para mostrar florianopolis no mapa, quando o GPS nao estiver abilitado
     double latitudeFloripa = -27.603007;
     double longitudeFloripa = -48.521171;
     // boolean flag to toggle periodic location updates
@@ -41,6 +43,8 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
     private GoogleApiClient mGoogleApiClient;
     // Google Map
     private GoogleMap googleMap;
+    //
+    private MapFragment mapFragment;
     //location
     private Location mLastLocation = null;
 
@@ -56,20 +60,36 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
         TAG = getActivity().toString();
         return rootView;
     }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState)
+    {
+        super.onActivityCreated(savedInstanceState);
+        //googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+        FragmentManager fm = getChildFragmentManager();
+        mapFragment = (MapFragment) fm.findFragmentById(R.id.map);
+        if (mapFragment == null)
+        {
+            mapFragment = MapFragment.newInstance();
+            fm.beginTransaction().replace(R.id.map, mapFragment).commit();
+        }
+    }
     /**
      * function to load map. If map is not created it will create it for you
      * */
     private void initilizeMap()
     {
-        if (googleMap == null) {
-            googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+        //if (googleMap == null)
+        //{
+            //googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
             // check if map is created successfully or not
             if (googleMap == null)
             {
-                Toast.makeText(this.getActivity().getApplicationContext(), "Sorry! unable to create maps", Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+                googleMap = mapFragment.getMap();
+                //Toast.makeText(this.getActivity().getApplicationContext(), "Sorry! unable to create maps", Toast.LENGTH_SHORT).show();
+                //getActivity().finish();
             }
-            else
+            //else
+            if(googleMap != null)
             {
                 googleMap.setMyLocationEnabled(true);
                 LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -79,7 +99,7 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
                 }
             }
         }
-    }
+    //}
     protected synchronized void buildGoogleApiClient()
     {
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
