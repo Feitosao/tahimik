@@ -41,7 +41,7 @@ import info.androidhive.slidingmenu.adapter.NavDrawerListAdapter;
 import info.androidhive.slidingmenu.model.NavDrawerItem;
 
 
-public class MainActivity extends Activity
+public class MainActivity extends Activity implements GetUser
 {
     private static int RESULT_LOAD_IMG = 1;
     //String imgDecodableString;
@@ -157,6 +157,15 @@ public class MainActivity extends Activity
                 loadImagefromGallery();
             }
         });*/
+    }
+
+    @Override
+    public User getUser()
+    {
+        String uid = auth.getUid();
+        String name = auth.getProviderData().get("displayName").toString();
+        String email = auth.getProviderData().get("email").toString();
+        return new User(uid,name,email);
     }
 
     /**

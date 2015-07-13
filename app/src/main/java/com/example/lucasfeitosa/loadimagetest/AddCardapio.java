@@ -1,5 +1,6 @@
 package com.example.lucasfeitosa.loadimagetest;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,8 +16,14 @@ import com.firebase.client.Firebase;
  */
 public class AddCardapio extends Fragment
 {
-    Firebase ref;
-    AuthData auth;
+    Activity activity;
+
+    @Override
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
+        this.activity = activity;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
@@ -31,7 +38,6 @@ public class AddCardapio extends Fragment
     public void onResume()
     {
         super.onResume();
-        TextView tvName = (TextView)getView().findViewById(R.id.userName);
-
+        User user = ((GetUser)activity).getUser();
     }
 }

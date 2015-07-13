@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/imgViewAddCardapio"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
 
-    <TextView
-        android:id="@+id/userName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-</RelativeLayout>
+        </ImageView>
+        <Button
+            android:id="@+id/buttonTakePicture"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_below="@id/imgViewAddCardapio"
+            android:text="Take Picture" >
+        </Button>
+        <Button
+            android:id="@+id/buttonLoadPicture"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_below="@id/buttonTakePicture"
+            android:text="Load Picture" >
+        </Button>
+    </RelativeLayout>
+</ScrollView>
