@@ -169,6 +169,12 @@ public class MainActivity extends Activity implements InterfaceAuxiliar//, Googl
         return new User(uid,name,email);
     }
 
+    @Override
+    public ArrayList<Estabelecimento> getEstabelecimentosCadastrados()
+    {
+        return new ArrayList<Estabelecimento>();
+    }
+
     /**
      * Slide menu item click listener
      * */

@@ -10,4 +10,5 @@ import java.util.ArrayList;
 public interface InterfaceAuxiliar
 {
     public User getUser();
+    public ArrayList<Estabelecimento> getEstabelecimentosCadastrados();
 }

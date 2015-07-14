@@ -1,6 +1,7 @@
 package com.example.lucasfeitosa.loadimagetest;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Lucas Feitosa on 12/07/2015.
@@ -8,8 +9,11 @@ import java.util.ArrayList;
 public class Cardapio
 {
     private int uid;
-    ArrayList<String> fotos = new ArrayList<>();
-
+    private ArrayList<String> fotos = new ArrayList<>();
+    private Date uploadedDate;
+    private int likes;
+    private int dislikes;
+    private ArrayList<Avaliacao> avaliacoes;
     public Cardapio()
     {
 
