@@ -29,5 +29,12 @@
             android:layout_below="@id/buttonTakePicture"
             android:text="Load Picture" >
         </Button>
+        <RelativeLayout
+            android:id="@+id/mapAddCardapio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonLoadPicture">
+        </RelativeLayout>
+
     </RelativeLayout>
 </ScrollView>

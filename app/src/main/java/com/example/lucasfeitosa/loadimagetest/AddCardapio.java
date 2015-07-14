@@ -6,10 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.firebase.client.AuthData;
-import com.firebase.client.Firebase;
 
 /**
  * Created by Lucas Feitosa on 11/07/2015.
@@ -38,6 +34,6 @@ public class AddCardapio extends Fragment
     public void onResume()
     {
         super.onResume();
-        User user = ((GetUser)activity).getUser();
+        User user = ((InterfaceAuxiliar)activity).getUser();
     }
 }

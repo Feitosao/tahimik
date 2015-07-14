@@ -3,21 +3,14 @@ package com.example.lucasfeitosa.loadimagetest;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Base64;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,23 +18,18 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.firebase.client.AuthData;
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
+import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import info.androidhive.slidingmenu.adapter.NavDrawerListAdapter;
 import info.androidhive.slidingmenu.model.NavDrawerItem;
 
 
-public class MainActivity extends Activity implements GetUser
+public class MainActivity extends Activity implements InterfaceAuxiliar//, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
 {
     private static int RESULT_LOAD_IMG = 1;
     //String imgDecodableString;
@@ -67,7 +55,10 @@ public class MainActivity extends Activity implements GetUser
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
 
+    private static int PLACE_PICKER_REQUEST = 1;
+    private GoogleApiClient mGoogleApiClient;
 
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -78,6 +69,14 @@ public class MainActivity extends Activity implements GetUser
         auth = ref.getAuth();
         setContentView(R.layout.main);
 
+        /*context = getApplicationContext();
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();*/
         //--------------------------------------------------------------------------------------------
         //sliding menu config
         mTitle = mDrawerTitle = getTitle();
@@ -86,8 +85,7 @@ public class MainActivity extends Activity implements GetUser
         navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
 
         // nav drawer icons from resources
-        navMenuIcons = getResources()
-                .obtainTypedArray(R.array.nav_drawer_icons);
+        navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
@@ -115,8 +113,7 @@ public class MainActivity extends Activity implements GetUser
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
         // setting the nav drawer list adapter
-        adapter = new NavDrawerListAdapter(getApplicationContext(),
-                navDrawerItems);
+        adapter = new NavDrawerListAdapter(getApplicationContext(),navDrawerItems);
         mDrawerList.setAdapter(adapter);
 
         // enabling action bar app icon and behaving it as toggle button
@@ -159,6 +156,10 @@ public class MainActivity extends Activity implements GetUser
         });*/
     }
 
+    /**
+     * An interface method overrided here, so now fragments in this activity can use this method to get user info
+     * @return
+     */
     @Override
     public User getUser()
     {
@@ -182,19 +183,23 @@ public class MainActivity extends Activity implements GetUser
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         getMenuInflater().inflate(R.menu.my, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // toggle nav drawer on selecting action bar app icon/title
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
+        if (mDrawerToggle.onOptionsItemSelected(item))
+        {
             return true;
         }
         // Handle action bar actions click
-        switch (item.getItemId()) {
+        switch (item.getItemId())
+        {
             case R.id.action_settings:
                 return true;
             default:
@@ -206,7 +211,8 @@ public class MainActivity extends Activity implements GetUser
      * Called when invalidateOptionsMenu() is triggered
      */
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
         // if nav drawer is opened, hide the action items
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
         menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
@@ -220,9 +226,21 @@ public class MainActivity extends Activity implements GetUser
     {
         // update the main content by replacing fragments
         Fragment fragment = null;
-        switch (position) {
+        switch (position)
+        {
             case 0:
                 fragment = new HomeFragment();
+
+                /*PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                Context context = getApplicationContext();
+                try
+                {
+                    startActivityForResult(builder.build(context), PLACE_PICKER_REQUEST);
+                }
+                catch (Exception e)
+                {
+
+                }*/
                 break;
             case 1:
                 fragment = new AddCardapio();
@@ -263,7 +281,18 @@ public class MainActivity extends Activity implements GetUser
             Log.e("MainActivity", "Error in creating fragment");
         }
     }
-
+    /*protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == PLACE_PICKER_REQUEST)
+        {
+            if (resultCode == RESULT_OK)
+            {
+                Place place = PlacePicker.getPlace(data, this);
+                String toastMsg = String.format("Place: %s", place.getName());
+                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+            }
+        }
+    }*/
     @Override
     public void setTitle(CharSequence title)
     {
@@ -307,7 +336,7 @@ public class MainActivity extends Activity implements GetUser
     }
 
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
@@ -350,5 +379,36 @@ public class MainActivity extends Activity implements GetUser
                     .show();
         }
 
+    }*/
+
+    /*@Override
+    public void onConnectionFailed(ConnectionResult arg0)
+    {
+        //mConnected = false;
+        Log.d(context.toString(), "conexao com o server localizador falhou");
     }
+    @Override
+    public void onConnectionSuspended(int i)
+    {
+        Log.d(context.toString(), "Location services suspended. Please reconnect.");
+        //mGoogleApiClient.connect();
+
+    }
+    @Override
+    public void onConnected(Bundle connectionHint)
+    {
+        Log.d(context.toString(), "Connected");
+    }
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+    @Override
+    protected void onStop()
+    {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }*/
 }
