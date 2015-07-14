@@ -1,7 +1,9 @@
 package com.example.lucasfeitosa.loadimagetest;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,9 +20,12 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.firebase.client.AuthData;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.facebook.FacebookSdk;
+import com.firebase.client.Query;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -104,15 +109,53 @@ public class LoginActivity extends Activity {
                     public void onAuthenticated(AuthData authData)
                     {
                         // The Facebook user is now authenticated with Firebase
+                        final String uid = authData.getUid();
+                        final String name = authData.getProviderData().get("displayName").toString();
+                        final String email = authData.getProviderData().get("email").toString();
+                        /*Query query = ref.child("users").orderByChild("Uid").equalTo(uid);
+                        query.addChildEventListener(new ChildEventListener() {
+                            @Override
+                            public void onChildAdded(DataSnapshot dataSnapshot, String s)
+                            {
+                                if(dataSnapshot.getValue() == null)
+                                {
+                                    Map<String,String> map = new HashMap<String, String>();
+                                    map.put("Name",name);
+                                    map.put("Email",email);
+                                    ref.child("users").child(uid).setValue(map);
+                                }
+                            }
+                            @Override
+                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError)
+                            {
+
+                            }
+                        });*/
                         Map<String,String> map = new HashMap<String, String>();
-                        map.put("Name",authData.getProviderData().get("displayName").toString());
-                        map.put("Email", authData.getProviderData().get("email").toString());
-                        ref.child("users").child(authData.getUid()).setValue(map);
+                        map.put("Name",name);
+                        map.put("Email",email);
+                        ref.child("users").child(uid).setValue(map);
                         changeActivity(MainActivity.class);
                     }
 
                     @Override
-                    public void onAuthenticationError(FirebaseError firebaseError) {
+                    public void onAuthenticationError(FirebaseError firebaseError)
+                    {
                         // there was an error
                     }
                 });
