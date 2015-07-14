@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class Cardapio
 {
+    private int uid;
     ArrayList<String> fotos = new ArrayList<>();
 
     public Cardapio()
